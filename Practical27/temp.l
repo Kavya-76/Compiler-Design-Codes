@@ -1,3 +1,8 @@
+/*
+Write a YACC program to recognize valid Arithmetic Expressions. 
+*/
+
+
 %{
 #include "temp.tab.h"
 %}

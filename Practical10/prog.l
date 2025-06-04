@@ -1,26 +1,25 @@
 /*
-Design a lex code to extract all html tags from the given file at runtime and store into text file at the runtime.
+Write a lex code to find whether string is a valid identifier or not using file handling.
 */
+
 
 %{
 #include <stdio.h>
-int tag_count = 0;
 %}
 
 %%
-"<"[^<>]+">" {fprintf(yyout,"\n %s",yytext); tag_count++;}
-.|\n        { /* Ignore everything else */ }
+
+[_a-zA-Z][_a-zA-Z0-9]*  { fprintf(yyout, "%s: is a Valid identifier\n", yytext); }
+[^ \t\n]+   { fprintf(yyout, "%s: is an Invalid identifier\n", yytext); }
+[ \t\n]     { /* Ignore whitespace */ }
+
 %%
 
 int main() {
     extern FILE *yyin, *yyout;
     yyin = fopen("input.txt", "r");
     yyout = fopen("output.txt", "w");
-
     yylex();
-
-    fclose(yyin);
-    fclose(yyout);
     return 0;
 }
 

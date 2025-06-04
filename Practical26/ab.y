@@ -1,3 +1,7 @@
+/*
+ Write a YACC program to recognize strings in given grammar:
+*/
+
 %{
 #include <stdio.h>
 #include <stdlib.h>

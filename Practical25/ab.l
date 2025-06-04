@@ -1,3 +1,5 @@
+/* Write a YACC program to recognize strings in given grammar: {anbn ,n>=0} */
+
 %{
 #include "ab.tab.h"
 %}

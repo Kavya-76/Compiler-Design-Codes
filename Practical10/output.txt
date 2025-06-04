@@ -1,0 +1,4 @@
+hello: is a Valid identifier
+_name: is a Valid identifier
+first_name: is a Valid identifier
+1name: is an Invalid identifier

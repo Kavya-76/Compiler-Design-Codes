@@ -1,43 +1,44 @@
 /*
-Write a lex program to design a DFA which accepts the strings with even number of zeroes and even number of one over input (0,1).
+Write a lex program to check for Prime number in input using ATOI.
 */
 
 %{
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+// Function to check if a number is prime
+int is_prime(int n) {
+    if (n <= 1) return 0;
+    if (n == 2) return 1;
+    if (n % 2 == 0) return 0;
+    for (int i = 3; i <= sqrt(n); i += 2) {
+        if (n % i == 0) return 0;
+    }
+    return 1;
+}
 %}
 
-%s A B C DEAD
-
 %%
-<INITIAL>0     BEGIN A;       
-<INITIAL>1     BEGIN C;
-<INITIAL>[^01\n] BEGIN DEAD;  
-<INITIAL>\n BEGIN INITIAL; {printf("Valid\n");}
 
-<A>0     BEGIN INITIAL;     
-<A>1     BEGIN B;     
-<A>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<A>\n BEGIN A; {printf("Invalid\n");}
+[0-9]+    {
+             int num = atoi(yytext);
+             if (is_prime(num))
+                 printf("Number %d is Prime\n", num);
+             else
+                 printf("Number %d is Not Prime\n", num);
+          }
 
-<B>0     BEGIN C;     
-<B>1     BEGIN A;     
-<B>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<B>\n BEGIN INITIAL; {printf("Invalid\n");}
-
-<C>0     BEGIN B;     
-<C>1     BEGIN INITIAL;     
-<C>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<C>\n BEGIN INITIAL; {printf("Invalid\n");}
+.|\n      ;  // ignore all other characters
 
 %%
 
 int main() {
-    printf("Enter a string over {0, 1}: ");
+    printf("Enter numbers (Ctrl+D to stop):\n");
     yylex();
     return 0;
 }
 
-int yywrap()
-{
+int yywrap() {
     return 1;
 }

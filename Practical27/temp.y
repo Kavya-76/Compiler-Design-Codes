@@ -1,3 +1,7 @@
+/*
+Write a YACC program to recognize valid Arithmetic Expressions. 
+*/
+
 %{
 #include <stdio.h>
 #include <stdlib.h>

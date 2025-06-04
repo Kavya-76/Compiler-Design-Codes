@@ -1,33 +1,31 @@
 /*
-Write a lex code that accept a string with 3 consecutive zeroes over the input symbol {0,1}.
+Write the lex code to design a DFA over input alphabet 0,1 which accepts the strings end with "01".
 */
 
 %{
 #include <stdio.h>
 %}
 
-%s A B C DEAD
+%s A B DEAD
 
 %%
 <INITIAL>0     BEGIN A;       
 <INITIAL>1     BEGIN INITIAL;
 <INITIAL>[^01\n] BEGIN DEAD;  
-<INITIAL>\n BEGIN INITIAL; {printf("Invalid\n");}
+<INITIAL>\n BEGIN INITIAL; {printf("Invalid: does not ends with '01'\n");}
 
-<A>0     BEGIN B;     
-<A>1     BEGIN INITIAL;     
+<A>0     BEGIN A;     
+<A>1     BEGIN B;     
 <A>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<A>\n BEGIN A; {printf("Invalid\n");}
+<A>\n BEGIN A; {printf("Invalid :does not ends with '01'\n");}
 
-<B>0     BEGIN C;     
+<B>0     BEGIN A;     
 <B>1     BEGIN INITIAL;     
 <B>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<B>\n BEGIN INITIAL; {printf("Invalid\n");}
+<B>\n BEGIN INITIAL; {printf("Valid: ends with '01'\n");}
 
-<C>0     BEGIN C;     
-<C>1     BEGIN C;     
-<C>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<C>\n BEGIN INITIAL; {printf("Valid\n");}
+<DEAD>.      ;     // Consume any remaining characters
+<DEAD>\n     { printf("String not accepted\n"); BEGIN INITIAL; }
 
 %%
 

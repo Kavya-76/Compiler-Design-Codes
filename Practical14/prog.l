@@ -1,37 +1,32 @@
 /*
-Write the lex code to design a DFA over input alphabet 0,1 which accepts the strings end with "01".
+Write a lex program to check for even or odd number in input using ATOI.
 */
 
 %{
 #include <stdio.h>
+#include <stdlib.h>  // for atoi()
 %}
 
-%s A B DEAD
-
 %%
-<INITIAL>0     BEGIN A;       
-<INITIAL>1     BEGIN INITIAL;
-<INITIAL>[^01\n] BEGIN DEAD;  
-<INITIAL>\n BEGIN INITIAL; {printf("Invalid: does not ends with '01'\n");}
 
-<A>0     BEGIN A;     
-<A>1     BEGIN B;     
-<A>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<A>\n BEGIN A; {printf("Invalid :does not ends with '01'\n");}
+[0-9]+    {
+             int num = atoi(yytext);
+             if (num % 2 == 0)
+                 printf("Number %d is Even\n", num);
+             else
+                 printf("Number %d is Odd\n", num);
+          }
 
-<B>0     BEGIN A;     
-<B>1     BEGIN INITIAL;     
-<B>[^01\n] BEGIN DEAD; {printf("Invalid character\n");}
-<B>\n BEGIN INITIAL; {printf("Valid: ends with '01'\n");}
+.|\n      ; // ignore any other characters
+
 %%
 
 int main() {
-    printf("Enter a string over {0, 1}: ");
+    printf("Enter numbers (Ctrl+D to end):\n");
     yylex();
     return 0;
 }
 
-int yywrap()
-{
+int yywrap() {
     return 1;
 }

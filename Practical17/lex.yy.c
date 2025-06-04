@@ -297,12 +297,12 @@ static yyconst int yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    3,    4,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    3,    4,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -370,7 +370,7 @@ char *yytext;
 #line 1 "prog.l"
 #define INITIAL 0
 /*
-Write a Lex program to design a DFA which accepts the strings starting with a and ending with b , over input alphabet a,b.
+Write the lex code to design a DFA over input alphabet 0,1 which accepts the strings end with "01".
 */
 #line 6 "prog.l"
 #include <stdio.h>
@@ -531,8 +531,7 @@ YY_DECL
 
 #line 11 "prog.l"
 
-
-#line 536 "lex.yy.c"
+#line 535 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -617,80 +616,80 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "prog.l"
-BEGIN A;
+#line 12 "prog.l"
+BEGIN A;       
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "prog.l"
-BEGIN DEAD;
+#line 13 "prog.l"
+BEGIN INITIAL;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "prog.l"
-BEGIN DEAD;
+#line 14 "prog.l"
+BEGIN DEAD;  
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "prog.l"
-BEGIN INITIAL; { printf("String not accepted\n"); }
+#line 15 "prog.l"
+BEGIN INITIAL; {printf("Invalid: does not ends with '01'\n");}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 18 "prog.l"
-BEGIN A;
+#line 17 "prog.l"
+BEGIN A;     
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 19 "prog.l"
-BEGIN B;
+#line 18 "prog.l"
+BEGIN B;     
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 20 "prog.l"
-BEGIN DEAD;
+#line 19 "prog.l"
+BEGIN DEAD; {printf("Invalid character\n");}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 21 "prog.l"
-BEGIN INITIAL; { printf("String not accepted\n"); }
+#line 20 "prog.l"
+BEGIN A; {printf("Invalid :does not ends with '01'\n");}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 23 "prog.l"
-BEGIN A;
+#line 22 "prog.l"
+BEGIN A;     
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 24 "prog.l"
-BEGIN B;
+#line 23 "prog.l"
+BEGIN INITIAL;     
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 25 "prog.l"
-BEGIN DEAD;
+#line 24 "prog.l"
+BEGIN DEAD; {printf("Invalid character\n");}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 26 "prog.l"
-BEGIN INITIAL; { printf("String accepted\n"); }
+#line 25 "prog.l"
+BEGIN INITIAL; {printf("Valid: ends with '01'\n");}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "prog.l"
+#line 27 "prog.l"
 ;     // Consume any remaining characters
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "prog.l"
+#line 28 "prog.l"
 { printf("String not accepted\n"); BEGIN INITIAL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "prog.l"
+#line 30 "prog.l"
 ECHO;
 	YY_BREAK
-#line 694 "lex.yy.c"
+#line 693 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(A):
 case YY_STATE_EOF(B):
@@ -1579,15 +1578,16 @@ int main()
 	return 0;
 	}
 #endif
-#line 31 "prog.l"
+#line 30 "prog.l"
 
 
 int main() {
-    printf("Enter the string: ");
+    printf("Enter a string over {0, 1}: ");
     yylex();
     return 0;
 }
 
-int yywrap() {
+int yywrap()
+{
     return 1;
 }

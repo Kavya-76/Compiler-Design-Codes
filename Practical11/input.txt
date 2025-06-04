@@ -1,1 +1,5 @@
-hello    world
+10
+120
+.023
+21.33
+hello

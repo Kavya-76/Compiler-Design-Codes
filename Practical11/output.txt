@@ -1,0 +1,9 @@
+10 is an Integer
+
+120 is an Integer
+
+.023 is a Float
+
+21.33 is a Float
+
+hello is Invalid (contains non-numeric characters)
