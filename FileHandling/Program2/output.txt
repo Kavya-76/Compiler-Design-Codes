@@ -1,5 +1,0 @@
-Number of lines = 2
-Number of characters = 49
-Number of spaces = 7
-Number of tabs = 0
-Number of words = 7

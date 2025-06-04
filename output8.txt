@@ -1,5 +1,0 @@
-No. of lines: 4
-No. of spaces: 10
-No. of chars: 55
-No. of tabs: 0
-No. of other characters: 2
